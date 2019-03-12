@@ -60,6 +60,7 @@ class VoiceViewController: UIViewController, UITableViewDataSource, UITableViewD
             url = UserDefaults.standard.object(forKey: "urlFile") as! URL?
             print(url!)
             
+            
             //urlArray.append(url!)
         }
         
