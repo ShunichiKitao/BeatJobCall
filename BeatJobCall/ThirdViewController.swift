@@ -124,9 +124,8 @@ class ThirdViewController: UIViewController, AVAudioRecorderDelegate {
       
         //urlの文字列が入ったstringsを"stringsArray"というForKeyで保存
         userDefaults.set(audioFile, forKey: "stringsFile")
-        userDefaults.set(url, forKey: "urlFile")
-        print(url)
-        print(audioFile)
+        userDefaults.set(url?.description, forKey: "urlFile")
+        print(url?.description)
         userDefaultsIsNil = false
         //初期値がtrue(userDefaultsには何も入っていない)なので、falseにしたuserDefaultsIsNilを保存する
         userDefaults.set(userDefaultsIsNil, forKey: "nilFlag")

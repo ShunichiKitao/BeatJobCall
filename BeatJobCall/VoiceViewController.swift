@@ -16,7 +16,7 @@ class VoiceViewController: UIViewController, UITableViewDataSource, UITableViewD
     var audioFile: String = ""
     
     //データ保存関係の変数
-    var url : URL?
+    var url : URL!
     var urlArray: [URL] = []
     let userDefaults = UserDefaults.standard
     var userDefaultsIsNil: Bool = true
@@ -60,9 +60,12 @@ class VoiceViewController: UIViewController, UITableViewDataSource, UITableViewD
             url = UserDefaults.standard.object(forKey: "urlFile") as! URL?
             print(url!)
             
-            
             //urlArray.append(url!)
         }
+        
+        guard let url = UserDefaults.standard.string(forKey: "urlFile") else { return }
+        guard let stringURL = URL(string: url) else { return }
+        self.url = stringURL
         
     }
 
@@ -78,9 +81,14 @@ class VoiceViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         if !isPlaying {
             audioPlayer.delegate = self
-            audioPlayer.play()
             
-            isPlaying = true
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: url)
+                audioPlayer.play()
+                isPlaying = true
+            } catch {
+                audioPlayer = nil
+            }
             
         }else{
             
