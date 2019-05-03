@@ -55,45 +55,27 @@ class VoiceViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
         //URLの方をUserDefalutsで読み込み。それから文字列とファイルで再生zr
-        if UserDefaults.standard.object(forKey: "urlFile") != nil {
-            
-            url = UserDefaults.standard.object(forKey: "urlFile") as! URL?
-            print(url!)
-            
-            //urlArray.append(url!)
-        }
-        
         guard let url = UserDefaults.standard.string(forKey: "urlFile") else { return }
         guard let stringURL = URL(string: url) else { return }
         self.url = stringURL
         
     }
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.delegate = self
         tableView.dataSource = self
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if !isPlaying {
-            audioPlayer.delegate = self
-            
-            do {
-                audioPlayer = try AVAudioPlayer(contentsOf: url)
-                audioPlayer.play()
-                isPlaying = true
-            } catch {
-                audioPlayer = nil
-            }
-            
-        }else{
-            
-            audioPlayer.stop()
-            isPlaying = false
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer.play()
+            isPlaying = true
+        } catch {
+            audioPlayer = nil
         }
     }
     
