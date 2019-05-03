@@ -54,7 +54,7 @@ class VoiceViewController: UIViewController, UITableViewDataSource, UITableViewD
             
         }
         
-        //URLの方をUserDefalutsで読み込み。それから文字列とファイルで再生
+        //URLの方をUserDefalutsで読み込み。それから文字列とファイルで再生zr
         if UserDefaults.standard.object(forKey: "urlFile") != nil {
             
             url = UserDefaults.standard.object(forKey: "urlFile") as! URL?
